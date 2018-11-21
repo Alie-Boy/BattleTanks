@@ -27,7 +27,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 }
 
 
-bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation)
+bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) const
 {
 	int32 ViewportSizeX, ViewPortSizeY;
 	GetViewportSize(ViewportSizeX, ViewPortSizeY);
@@ -37,8 +37,28 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation)
 		ViewportSizeX * CrosshairXLocation,
 		ViewPortSizeY * CrosshairYLocation
 	);
-	UE_LOG(LogTemp, Warning, TEXT("ScreenLocation: %s"), *ScreenLocation.ToString());
+
+	FVector LookDirection;
+	if (GetLookDirection(ScreenLocation, LookDirection))
+	{	
+		UE_LOG(LogTemp, Warning, TEXT("WorldDirection: %s"), *LookDirection.ToString());
+	}
+
+	// TODO: Line Trace along LookDirection to see if it hits landscape.
+
 	return false;
+}
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const
+{
+	FVector CameraLocation;  /// waste, but don't delete
+
+	return DeprojectScreenPositionToWorld(
+		ScreenLocation.X,
+		ScreenLocation.Y,
+		CameraLocation,
+		LookDirection
+	);
 }
 
 
