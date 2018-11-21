@@ -10,6 +10,7 @@ void ATankPlayerController::BeginPlay()
 	UE_LOG(LogTemp, Warning, TEXT("Player Controller is possessing the %s"), *GetControlledTank()->GetName());
 }
 
+
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick( DeltaTime );
@@ -21,20 +22,22 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector HitLocation;
 	if (!GetSightRayHitLocation(HitLocation))
 	{
-		// TODO: Log out error.
+		UE_LOG(LogTemp, Warning, TEXT("Can't calculate hit location of crosshair."));
 	}
 }
 
+
 bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation)
 {
-	// Ray Cast to see if line hits something
-	
-	// if true
-		// store hitlocation with param OutHitLocation
-		// return true
-	// else
-		// return false
+	int32 ViewportSizeX, ViewPortSizeY;
+	GetViewportSize(ViewportSizeX, ViewPortSizeY);
 
+	FVector2D ScreenLocation;
+	ScreenLocation = FVector2D(
+		ViewportSizeX * CrosshairXLocation,
+		ViewPortSizeY * CrosshairYLocation
+	);
+	UE_LOG(LogTemp, Warning, TEXT("ScreenLocation: %s"), *ScreenLocation.ToString());
 	return false;
 }
 
