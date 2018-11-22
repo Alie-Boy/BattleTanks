@@ -18,6 +18,9 @@ class BATTLETANKS_API ATankPlayerController : public APlayerController
 private:
 
 	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 100000.f;
+
+	UPROPERTY(EditAnywhere)
 	float CrosshairXLocation = 0.5f;
 	
 	UPROPERTY(EditAnywhere)
@@ -32,6 +35,8 @@ private:
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const;
+
+	void GetLookVectorHitLocation(FVector & OutHitLocation, FVector LookDirection) const;
 
 public:
 

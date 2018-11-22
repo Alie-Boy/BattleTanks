@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
-
+#include "Engine/World.h"
+#include "CollisionQueryParams.h"
+#include "DrawDebugHelpers.h"
 
 void ATankPlayerController::BeginPlay()
 {
@@ -20,9 +22,9 @@ void ATankPlayerController::Tick(float DeltaTime)
 void ATankPlayerController::AimTowardsCrosshair()
 {
 	FVector HitLocation;
-	if (!GetSightRayHitLocation(HitLocation))
+	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Can't calculate hit location of crosshair."));
+		UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
 	}
 }
 
@@ -40,13 +42,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) con
 
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
-	{	
-		UE_LOG(LogTemp, Warning, TEXT("WorldDirection: %s"), *LookDirection.ToString());
+	{
+		GetLookVectorHitLocation(OutHitLocation, LookDirection);
 	}
 
-	// TODO: Line Trace along LookDirection to see if it hits landscape.
 
-	return false;
+	return true;
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const
@@ -59,6 +60,33 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &
 		CameraLocation,
 		LookDirection
 	);
+}
+
+void ATankPlayerController::GetLookVectorHitLocation(FVector & OutHitLocation, FVector LookDirection) const
+{
+	FHitResult HitResult;
+	FVector StartingPoint = PlayerCameraManager->GetCameraLocation();
+	FVector EndLocation = StartingPoint + (LookDirection * LineTraceRange);
+	FCollisionQueryParams QueryParams = FCollisionQueryParams(TEXT(""), false, this);
+	FCollisionResponseParams ResponeParams = FCollisionResponseParams();
+
+	DrawDebugLine(GetWorld(), StartingPoint, LookDirection * LineTraceRange, FColor(255, 0, 0));
+
+	if (GetWorld()->LineTraceSingleByChannel(
+			HitResult,
+			StartingPoint,
+			EndLocation,
+			ECC_Visibility,
+			QueryParams,
+			ResponeParams)
+		)
+	{
+		OutHitLocation = HitResult.Location;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Unable to determine hit location."));
+	}
 }
 
 
