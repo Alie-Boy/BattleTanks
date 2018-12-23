@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "TankBarrel.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -33,7 +34,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
@@ -51,12 +52,22 @@ void UTankAimingComponent::AimAt(FVector AimLocation, float ProjectileSpeed)
 		ProjectileSpeed)
 		)
 	{
-		FVector LaunchDirection = OutProjectileVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("Projectile launch direction = %s"), *LaunchDirection.ToString());
+		FVector AimDirection = OutProjectileVelocity.GetSafeNormal();
+		MoveBarrelTowards(AimDirection);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Can't find launch direction."));
+//		UE_LOG(LogTemp, Warning, TEXT("Can't find launch direction."));
 	}
+}
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	FRotator BarrelRotation = Barrel->GetForwardVector().Rotation();
+	FRotator AimRotation = AimDirection.Rotation();
+	// get difference between barrels direction and launch direction
+	FRotator DeltaRotation = AimRotation - BarrelRotation;
+	
+	Barrel->Elevate(5.f);	// TODO get a number from interface
 }
 
