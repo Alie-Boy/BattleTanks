@@ -4,7 +4,7 @@
 #include "Tank.h"
 #include "Engine/World.h"
 #include "CollisionQueryParams.h"
-#include "DrawDebugHelpers.h"
+//#include "DrawDebugHelpers.h"
 
 void ATankPlayerController::BeginPlay()
 {
@@ -71,7 +71,7 @@ void ATankPlayerController::GetLookVectorHitLocation(FVector & OutHitLocation, F
 	FCollisionQueryParams QueryParams = FCollisionQueryParams(TEXT(""), false, this);
 	FCollisionResponseParams ResponeParams = FCollisionResponseParams();
 
-	DrawDebugLine(GetWorld(), StartingPoint, LookDirection * LineTraceRange, FColor(255, 0, 0));
+//	DrawDebugLine(GetWorld(), StartingPoint, LookDirection * LineTraceRange, FColor(255, 0, 0));
 
 	if (GetWorld()->LineTraceSingleByChannel(
 			HitResult,

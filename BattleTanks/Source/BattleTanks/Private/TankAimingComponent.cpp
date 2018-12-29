@@ -49,7 +49,11 @@ void UTankAimingComponent::AimAt(FVector AimLocation, float ProjectileSpeed)
 		OutProjectileVelocity,
 		StartingLocation,
 		AimLocation,
-		ProjectileSpeed)
+		ProjectileSpeed,
+		false,
+		0.f,
+		0.f,
+		ESuggestProjVelocityTraceOption::DoNotTrace)
 		)
 	{
 		FVector AimDirection = OutProjectileVelocity.GetSafeNormal();
@@ -57,7 +61,7 @@ void UTankAimingComponent::AimAt(FVector AimLocation, float ProjectileSpeed)
 	}
 	else
 	{
-//		UE_LOG(LogTemp, Warning, TEXT("Can't find launch direction."));
+		UE_LOG(LogTemp, Warning, TEXT("Can't find launch direction."));
 	}
 }
 
@@ -68,6 +72,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	// get difference between barrels direction and launch direction
 	FRotator DeltaRotation = AimRotation - BarrelRotation;
 	
-	Barrel->Elevate(5.f);	// TODO get a number from interface
+	Barrel->Elevate(DeltaRotation.Pitch);
 }
 
