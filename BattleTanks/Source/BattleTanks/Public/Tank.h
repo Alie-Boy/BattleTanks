@@ -23,6 +23,7 @@ public:
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
+
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBP;  // alternative to UClass* ProjectileBP;
 

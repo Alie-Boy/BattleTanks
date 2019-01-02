@@ -13,6 +13,7 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+
 }
 
 // Called when the game starts or when spawned
@@ -61,7 +62,9 @@ void ATank::Fire()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Tank fires"));
 
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBP, Barrel->GetSocketTransform(FName("ProjectileSpawn")));
+	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBP,
+																  Barrel->GetSocketTransform(FName("ProjectileSpawn")));
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 
 void ATank::AimAt(FVector HitLocation)
