@@ -9,8 +9,6 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UE_LOG(LogTemp, Warning, TEXT("Player Controller is possessing the %s"), *GetControlledTank()->GetName());
 }
 
 
@@ -86,7 +84,7 @@ void ATankPlayerController::GetLookVectorHitLocation(FVector & OutHitLocation, F
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("Unable to determine hit location."));
+	//	UE_LOG(LogTemp, Error, TEXT("Unable to determine hit location."));
 	}
 }
 

@@ -4,22 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
-#include "TankTurret.generated.h"
+#include "TankTrack.generated.h"
 
 /**
  * 
  */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class BATTLETANKS_API UTankTurret : public UStaticMeshComponent
+class BATTLETANKS_API UTankTrack : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 	
 public:
 
-	void Rotate(float RelativeSpeed);
+	UFUNCTION()
+	void SetThrottle(float RelativeThrottle);
 	
-private:
-
-	UPROPERTY(EditDefaultsOnly, Category = "Turret Movement")
-	float MaxDegreesPerSecond = 20.f;
+	
 };

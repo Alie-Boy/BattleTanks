@@ -67,7 +67,7 @@ void UTankAimingComponent::AimAt(FVector AimLocation, float ProjectileSpeed)
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Can't find launch direction."));
+	//	UE_LOG(LogTemp, Warning, TEXT("Can't find launch direction."));
 	}
 }
 

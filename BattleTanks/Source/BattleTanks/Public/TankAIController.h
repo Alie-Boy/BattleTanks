@@ -19,10 +19,10 @@ class BATTLETANKS_API ATankAIController : public AAIController
 	
 private:
 	virtual void BeginPlay() override;
-	
-	ATank* GetControlledTank() const;
 
-	ATank* GetPlayerTank() const;
+	float ReloadTime = 3.f; // default
+
+	double PreviousFireTime = 0;
 
 public:
 	virtual void Tick(float DeltaTime) override;

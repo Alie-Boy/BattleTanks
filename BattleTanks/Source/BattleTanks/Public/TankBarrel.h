@@ -19,12 +19,12 @@ public:
 	
 private:
 	
-	UPROPERTY(EditAnywhere, Category = "Barrel Movement Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Barrel Movement Setup")
 	float MaxDegreesPerSecond = 7.f;
 
-	UPROPERTY(EditAnywhere, Category = "Barrel Movement Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Barrel Movement Setup")
 	float MaxElevation = 40.f;
 
-	UPROPERTY(EditAnywhere, Category = "Barrel Movement Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Barrel Movement Setup")
 	float MinElevation = 0.f;
 };

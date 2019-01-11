@@ -60,8 +60,6 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Tank fires"));
-
 	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBP,
 																  Barrel->GetSocketTransform(FName("ProjectileSpawn")));
 	Projectile->LaunchProjectile(LaunchSpeed);
