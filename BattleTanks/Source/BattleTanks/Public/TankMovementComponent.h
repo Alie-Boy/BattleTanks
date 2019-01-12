@@ -25,7 +25,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void IntendMoveForward(float RelativeDirection);
-	
+
+	UFUNCTION(BlueprintCallable)
+	void IntendRotateClockwise(float RelativeDirection);
+
 private:
 
 	UTankTrack* LeftTrack = nullptr;

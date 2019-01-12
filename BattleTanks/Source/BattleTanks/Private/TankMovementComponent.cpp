@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankMovementComponent.h"
+#include "TankTrack.h"
 
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
@@ -11,6 +12,16 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 
 void UTankMovementComponent::IntendMoveForward(float RelativeDirection)
 {
-	//FString Name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("Track direction: %f"), RelativeDirection);
+	LeftTrack->SetThrottle(RelativeDirection/2);
+	RightTrack->SetThrottle(RelativeDirection/2);  // This is division by 2 is a band aid fix for now.	
+
+	//TODO: throttle may be doubled due to throttle being applied on TWO tracks
+}
+
+void UTankMovementComponent::IntendRotateClockwise(float RelativeDirection)
+{
+	LeftTrack->SetThrottle(RelativeDirection);
+	RightTrack->SetThrottle(-RelativeDirection);
+
+	//TODO: throttle might be getting even higher because of
 }
