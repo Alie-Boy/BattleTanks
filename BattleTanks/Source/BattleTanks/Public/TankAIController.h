@@ -22,6 +22,9 @@ private:
 
 	float ReloadTime = 3.f; // default
 
+	UPROPERTY(EditDefaultsOnly)
+	float AcceptanceRadius = 2000.f;
+
 	double PreviousFireTime = 0;
 
 public:

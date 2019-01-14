@@ -82,10 +82,6 @@ void ATankPlayerController::GetLookVectorHitLocation(FVector & OutHitLocation, F
 	{
 		OutHitLocation = HitResult.Location;
 	}
-	else
-	{
-	//	UE_LOG(LogTemp, Error, TEXT("Unable to determine hit location."));
-	}
 }
 
 

@@ -65,10 +65,6 @@ void UTankAimingComponent::AimAt(FVector AimLocation, float ProjectileSpeed)
 		FVector AimDirection = OutProjectileVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
 	}
-	else
-	{
-	//	UE_LOG(LogTemp, Warning, TEXT("Can't find launch direction."));
-	}
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)

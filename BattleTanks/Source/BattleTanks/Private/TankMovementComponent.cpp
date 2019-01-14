@@ -23,5 +23,19 @@ void UTankMovementComponent::IntendRotateClockwise(float RelativeDirection)
 	LeftTrack->SetThrottle(RelativeDirection);
 	RightTrack->SetThrottle(-RelativeDirection);
 
-	//TODO: throttle might be getting even higher because of
+	//TODO: throttle might be getting even higher because of addition of IntendMoveForward and IntendRotateClockwise 
+	//		when pressed simultaneously
+}
+
+void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, bool bForceMaxSpeed)
+{
+	FVector  TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	FVector MoveDirectionIntention = MoveVelocity.GetSafeNormal();
+//	UE_LOG(LogTemp, Warning, TEXT("%s trying to go to %s"), *Name, *MoveDirection);
+
+	float RelativeForwardIntent = FVector::DotProduct(TankForward,  MoveDirectionIntention);
+	IntendMoveForward(RelativeForwardIntent);
+
+	FVector RelativeRotateIntent = FVector::CrossProduct(MoveDirectionIntention, TankForward);
+	IntendRotateClockwise(RelativeRotateIntent.Z);
 }
