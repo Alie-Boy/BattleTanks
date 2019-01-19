@@ -6,12 +6,8 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-
 class ATank;
 
-/**
- * 
- */
 UCLASS()
 class BATTLETANKS_API ATankAIController : public AAIController
 {
@@ -22,7 +18,6 @@ private:
 
 	float ReloadTime = 3.f; // default
 
-	UPROPERTY(EditDefaultsOnly)
 	float AcceptanceRadius = 2000.f;
 
 	double PreviousFireTime = 0;

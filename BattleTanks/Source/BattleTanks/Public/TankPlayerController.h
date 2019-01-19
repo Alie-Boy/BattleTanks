@@ -28,9 +28,12 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float CrosshairYLocation = 0.387f;
 
-private:
-	
+protected:
+
+	UFUNCTION(BlueprintCallable)
 	ATank* GetControlledTank() const;
+
+private:
 
 	void AimTowardsCrosshair();
 
