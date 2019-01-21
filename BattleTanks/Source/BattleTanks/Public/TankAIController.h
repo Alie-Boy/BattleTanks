@@ -16,9 +16,9 @@ class BATTLETANKS_API ATankAIController : public AAIController
 private:
 	virtual void BeginPlay() override;
 
-	float ReloadTime = 3.f; // default
-
 	float AcceptanceRadius = 2000.f;
+
+	float ReloadTime = 3.f; // default
 
 	double PreviousFireTime = 0;
 

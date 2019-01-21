@@ -27,23 +27,18 @@ void UTankAimingComponent::BeginPlay()
 }
 
 
+void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet)
+{
+	Barrel = BarrelToSet;
+	Turret = TurretToSet;
+}
+
 // Called every frame
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
-{
-	Barrel = BarrelToSet;
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
-{
-	Turret = TurretToSet;
-}
 
 void UTankAimingComponent::AimAt(FVector AimLocation, float ProjectileSpeed)
 {
