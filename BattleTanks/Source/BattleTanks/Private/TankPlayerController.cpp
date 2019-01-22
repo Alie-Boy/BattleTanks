@@ -4,11 +4,15 @@
 #include "Tank.h"
 #include "Engine/World.h"
 #include "CollisionQueryParams.h"
+#include <TankAimingComponent.h>
 //#include "DrawDebugHelpers.h"
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+	UTankAimingComponent* TankAimingComp = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (TankAimingComp) {FoundAimingComponent(TankAimingComp);}
+	else UE_LOG(LogTemp, Warning, TEXT("Tank Aiming Component could not be found in Begin Play"));
 }
 
 

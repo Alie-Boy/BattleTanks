@@ -37,9 +37,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable, Category="Setup")
-	void Initialise(UTankBarrel* BarrelToSet, UTankAimingComponent* TankAimingToSet);
-
 public:	
 
 	// Called to bind functionality to input
