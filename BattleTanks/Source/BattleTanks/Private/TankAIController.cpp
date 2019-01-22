@@ -23,7 +23,7 @@ void ATankAIController::Tick(float DeltaTime)
 	ControlledTank->AimAt(PlayerTank->GetActorLocation());
 
 	MoveToActor(PlayerTank, AcceptanceRadius);
-	if (PlayerTank && IsReloaded)
+	if (ensure(PlayerTank) && IsReloaded)
 	{
 		ControlledTank->Fire();
 		PreviousFireTime = GetWorld()->GetTimeSeconds();
