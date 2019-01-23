@@ -23,10 +23,6 @@ private:
 
 	float AcceptanceRadius = 2000.f;
 
-	float ReloadTime = 3.f; // default
-
-	double PreviousFireTime = 0;
-
 public:
 	virtual void Tick(float DeltaTime) override;
 };

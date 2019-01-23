@@ -23,5 +23,5 @@ void ATankAIController::Tick(float DeltaTime)
 
 	MoveToActor(PlayerTank, AcceptanceRadius);
 
-	//TODO reintroduce a fire method
+	TankAimingComp->Fire();
 }

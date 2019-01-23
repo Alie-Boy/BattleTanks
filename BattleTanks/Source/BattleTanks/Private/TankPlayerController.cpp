@@ -1,11 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
-#include "Tank.h"
 #include "Engine/World.h"
 #include "CollisionQueryParams.h"
 #include <TankAimingComponent.h>
-//#include "DrawDebugHelpers.h"
 
 void ATankPlayerController::BeginPlay()
 {
@@ -74,8 +72,6 @@ void ATankPlayerController::GetLookVectorHitLocation(FVector & OutHitLocation, F
 	FVector EndLocation = StartingPoint + (LookDirection * LineTraceRange);
 	FCollisionQueryParams QueryParams = FCollisionQueryParams(TEXT(""), false, this);
 	FCollisionResponseParams ResponeParams = FCollisionResponseParams();
-
-//	DrawDebugLine(GetWorld(), StartingPoint, LookDirection * LineTraceRange, FColor(255, 0, 0));
 
 	if (GetWorld()->LineTraceSingleByChannel(
 			HitResult,

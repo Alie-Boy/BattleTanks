@@ -6,6 +6,10 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
+
+class AProjectile;
+
+
 UENUM()
 enum class EFiringStatus : uint8 {
 	Locked,
@@ -25,6 +29,9 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	TSubclassOf<AProjectile> ProjectileBP;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -40,15 +47,20 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	// TODO SetTurretReference needed for Rotation
-
 	void AimAt(FVector AimLocation);
 
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ProjectileSpeed = 4000.f;
+	UFUNCTION(BlueprintCallable, Category = "Mouse Setup")
+	void Fire();
 	
 	void MoveBarrelTowards(FVector AimDirection);
 private:
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ProjectileSpeed = 4000.f;
+
+	float ReloadTime = 3.f; // default
+
+	double PreviousFireTime = 0;
 
 	UTankTurret* Turret = nullptr;
 

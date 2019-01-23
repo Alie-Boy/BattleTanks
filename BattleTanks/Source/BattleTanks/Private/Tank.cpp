@@ -1,9 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank.h"
-#include "TankBarrel.h"
-#include "TankTurret.h"
-#include "Projectile.h"
 
 // Sets default values
 ATank::ATank()
@@ -23,17 +20,6 @@ void ATank::BeginPlay()
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
-void ATank::Fire()
-{
-	if (ensure(Barrel))
-	{
-		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBP,
-			Barrel->GetSocketTransform(FName("ProjectileSpawn")));
-
-		Projectile->LaunchProjectile(LaunchSpeed);
-	}
-}
 
