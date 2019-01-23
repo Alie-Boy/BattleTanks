@@ -42,7 +42,10 @@ public:
 
 	// TODO SetTurretReference needed for Rotation
 
-	void AimAt(FVector AimLocation, float ProjectileSpeed);
+	void AimAt(FVector AimLocation);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ProjectileSpeed = 4000.f;
 	
 	void MoveBarrelTowards(FVector AimDirection);
 private:

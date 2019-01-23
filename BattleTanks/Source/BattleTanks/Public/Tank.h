@@ -10,7 +10,6 @@
 class UTankBarrel;
 class UTankTurret;
 class AProjectile;
-class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANKS_API ATank : public APawn
@@ -20,9 +19,6 @@ class BATTLETANKS_API ATank : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ATank();
-
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBP;  // alternative to UClass* ProjectileBP;
@@ -47,6 +43,4 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Mouse Setup")
 	void Fire();
 
-	void AimAt(FVector HitLocation);
-	
 };

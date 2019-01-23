@@ -1,31 +1,27 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAIController.h"
-#include "Tank.h"
 #include "GameFramework/Actor.h"
+#include "TankAimingComponent.h"
 
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
+	TankAimingComp = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 }
 
 
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	bool IsReloaded = (GetWorld()->GetTimeSeconds() - PreviousFireTime) > ReloadTime;
 
-	ATank* PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	ATank* ControlledTank = Cast<ATank>(GetPawn());
+	APawn* PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 
-	ControlledTank->AimAt(PlayerTank->GetActorLocation());
+	if (!ensure(TankAimingComp)) { return; }
+	TankAimingComp->AimAt(PlayerTank->GetActorLocation());
 
 	MoveToActor(PlayerTank, AcceptanceRadius);
-	if (ensure(PlayerTank) && IsReloaded)
-	{
-		ControlledTank->Fire();
-		PreviousFireTime = GetWorld()->GetTimeSeconds();
-	}
+
+	//TODO reintroduce a fire method
 }

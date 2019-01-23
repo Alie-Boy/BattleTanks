@@ -6,7 +6,7 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANKS_API ATankAIController : public AAIController
@@ -15,6 +15,11 @@ class BATTLETANKS_API ATankAIController : public AAIController
 	
 private:
 	virtual void BeginPlay() override;
+
+	UTankAimingComponent* TankAimingComp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4000.f;
 
 	float AcceptanceRadius = 2000.f;
 
