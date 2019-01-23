@@ -11,8 +11,10 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	UTankAimingComponent* TankAimingComp = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	if (ensure(TankAimingComp)) {FoundAimingComponent(TankAimingComp);}
-	else UE_LOG(LogTemp, Warning, TEXT("Tank Aiming Component could not be found in Begin Play"));
+	if (ensure(TankAimingComp))
+	{
+		FoundAimingComponent(TankAimingComp);
+	}
 }
 
 

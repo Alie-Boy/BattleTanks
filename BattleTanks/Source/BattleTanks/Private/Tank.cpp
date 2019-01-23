@@ -19,6 +19,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	UE_LOG(LogTemp, Warning, TEXT("MONKEY: Tank C++ BeginPlay called"));
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 

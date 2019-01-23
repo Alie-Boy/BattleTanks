@@ -28,7 +28,6 @@ void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, boo
 {
 	FVector  TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	FVector MoveDirectionIntention = MoveVelocity.GetSafeNormal();
-//	UE_LOG(LogTemp, Warning, TEXT("%s trying to go to %s"), *Name, *MoveDirection);
 
 	float RelativeForwardIntent = FVector::DotProduct(TankForward,  MoveDirectionIntention);
 	IntendMoveForward(RelativeForwardIntent);
