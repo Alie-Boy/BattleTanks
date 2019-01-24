@@ -55,8 +55,15 @@ public:
 	void MoveBarrelTowards(FVector AimDirection);
 private:
 
+	bool IsBarrelMoving() const;
+
+	FVector AimDirection = FVector();
+
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ProjectileSpeed = 4000.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float AimTolerance = 0.001f;
 
 	float ReloadTime = 3.f; // default
 
