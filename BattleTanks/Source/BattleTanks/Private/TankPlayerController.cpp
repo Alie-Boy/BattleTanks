@@ -15,7 +15,6 @@ void ATankPlayerController::BeginPlay()
 	}
 }
 
-
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick( DeltaTime );
@@ -30,7 +29,6 @@ void ATankPlayerController::AimTowardsCrosshair()
 		TankAimingComp->AimAt(HitLocation);
 	}
 }
-
 
 bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) const
 {

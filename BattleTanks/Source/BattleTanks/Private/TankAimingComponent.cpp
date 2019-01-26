@@ -23,7 +23,6 @@ void UTankAimingComponent::BeginPlay()
 	PreviousFireTime = GetWorld()->GetTimeSeconds();
 }
 
-
 void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet)
 {
 	Barrel = BarrelToSet;
@@ -42,7 +41,6 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	else
 		FiringState = EFiringStatus::Locked;
 }
-
 
 void UTankAimingComponent::AimAt(FVector AimLocation)
 {
