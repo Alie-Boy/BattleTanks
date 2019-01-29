@@ -9,14 +9,19 @@ UTankTrack::UTankTrack()
 
 void UTankTrack::BeginPlay()
 {
+	Super::BeginPlay();
 	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
 }
 
 void UTankTrack::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	
+}
+
+void UTankTrack::ReduceSidewaysForce()
+{
 	float StrafeSlipSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
+	float DeltaTime = GetWorld()->GetDeltaSeconds();
 	FVector AntiSlipAccel = -StrafeSlipSpeed / DeltaTime * GetRightVector();
 	UStaticMeshComponent* TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
 	FVector AntiSlipForce = AntiSlipAccel * (TankRoot->GetMass()) / 2; // 2 is used to nullify the effect of double retardation
@@ -25,16 +30,20 @@ void UTankTrack::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 
 void UTankTrack::SetThrottle(float RelativeThrottle)
 {
-	RelativeThrottle = FMath::Clamp<float>(RelativeThrottle, -1.f, +1.f);
-	auto ForceApplied = GetForwardVector() * RelativeThrottle * TrackMaxDrivingForce;
-	auto ForceLocation = GetComponentLocation();
-	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
-	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
+	Throttle = FMath::Clamp<float>(RelativeThrottle+Throttle, -1.f, +1.f);
 }
 
 void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& OutHit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("%s hitting ground."), *GetName());
+	DriveTrack();
+	ReduceSidewaysForce();
+	Throttle = 0;
 }
 
-
+void UTankTrack::DriveTrack()
+{
+	auto ForceApplied = GetForwardVector() * Throttle * TrackMaxDrivingForce;
+	auto ForceLocation = GetComponentLocation();
+	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
+	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
+}
