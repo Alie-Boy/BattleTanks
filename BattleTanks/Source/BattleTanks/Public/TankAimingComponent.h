@@ -49,6 +49,8 @@ public:
 
 	void AimAt(FVector AimLocation);
 
+	EFiringStatus GetFiringState() const;
+
 	UFUNCTION(BlueprintCallable, Category = "Mouse Setup")
 	void Fire();
 	

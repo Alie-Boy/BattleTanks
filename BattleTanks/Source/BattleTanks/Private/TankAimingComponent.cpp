@@ -64,6 +64,8 @@ void UTankAimingComponent::AimAt(FVector AimLocation)
 	}
 }
 
+EFiringStatus UTankAimingComponent::GetFiringState() const { return FiringState; }
+
 void UTankAimingComponent::MoveBarrelTowards(FVector HitDirection)
 {
 	AimDirection = HitDirection;
@@ -73,10 +75,10 @@ void UTankAimingComponent::MoveBarrelTowards(FVector HitDirection)
 	FRotator AimRotation = HitDirection.Rotation();
 	// get difference between barrels direction and launch direction
 	FRotator DeltaRotation = AimRotation - BarrelRotation;
-	
-	Barrel->Elevate(DeltaRotation.Pitch);
 
-	Turret->Rotate(DeltaRotation.Yaw);
+	Barrel->Elevate(DeltaRotation.GetNormalized().Pitch);
+
+	Turret->Rotate(DeltaRotation.GetNormalized().Yaw);
 
 }
 

@@ -19,8 +19,6 @@ private:
 	UTankAimingComponent* TankAimingComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 4000.f;
-
 	float AcceptanceRadius = 2000.f;
 
 public:

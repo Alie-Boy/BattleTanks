@@ -30,7 +30,8 @@ void UTankTrack::ReduceSidewaysForce()
 
 void UTankTrack::SetThrottle(float RelativeThrottle)
 {
-	Throttle = FMath::Clamp<float>(RelativeThrottle+Throttle, -1.f, +1.f);
+	Throttle = FMath::Clamp<float>(RelativeThrottle+Throttle, -1.f, +1.f); //did RelativeThrottle+Throttle because OnHit might 
+																			// get called multiple times per frame.
 }
 
 void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& OutHit)
