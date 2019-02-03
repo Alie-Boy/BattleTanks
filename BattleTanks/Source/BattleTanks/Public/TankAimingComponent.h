@@ -12,6 +12,7 @@ class AProjectile;
 
 UENUM()
 enum class EFiringStatus : uint8 {
+	NoAmmo,
 	Locked,
 	Aiming,
 	Reloading
@@ -41,6 +42,9 @@ protected:
 
 public:
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int32 GetAmmoCount() const;
+
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
@@ -51,11 +55,13 @@ public:
 
 	EFiringStatus GetFiringState() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Mouse Setup")
+	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 	
 	void MoveBarrelTowards(FVector AimDirection);
 private:
+
+	int32 AmmoCount = 5;
 
 	bool IsBarrelMoving() const;
 

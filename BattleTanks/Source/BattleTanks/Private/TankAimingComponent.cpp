@@ -23,6 +23,8 @@ void UTankAimingComponent::BeginPlay()
 	PreviousFireTime = GetWorld()->GetTimeSeconds();
 }
 
+int32 UTankAimingComponent::GetAmmoCount() const { return AmmoCount; }
+
 void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet)
 {
 	Barrel = BarrelToSet;
@@ -34,7 +36,9 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if ((GetWorld()->GetTimeSeconds() - PreviousFireTime) < ReloadTime)
+	if (GetAmmoCount() <= 0)				// Ammo check must be done firstly
+		FiringState = EFiringStatus::NoAmmo;
+	else if ((GetWorld()->GetTimeSeconds() - PreviousFireTime) < ReloadTime)
 		FiringState = EFiringStatus::Reloading;
 	else if (IsBarrelMoving())
 		FiringState = EFiringStatus::Aiming;
@@ -93,7 +97,7 @@ bool UTankAimingComponent::IsBarrelMoving() const
 
 void UTankAimingComponent::Fire()
 {
-	if (ensure(Barrel) && (FiringState != EFiringStatus::Reloading))
+	if (ensure(Barrel) && (FiringState != EFiringStatus::Reloading) && (FiringState != EFiringStatus::NoAmmo))
 	{
 		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBP,
 			Barrel->GetSocketTransform(FName("ProjectileSpawn")));
@@ -101,5 +105,7 @@ void UTankAimingComponent::Fire()
 		Projectile->LaunchProjectile(ProjectileSpeed);
 
 		PreviousFireTime = GetWorld()->GetTimeSeconds();
+
+		AmmoCount--;
 	}
 }
