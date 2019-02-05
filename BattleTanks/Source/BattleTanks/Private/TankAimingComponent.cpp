@@ -99,6 +99,7 @@ void UTankAimingComponent::Fire()
 {
 	if (ensure(Barrel) && (FiringState != EFiringStatus::Reloading) && (FiringState != EFiringStatus::NoAmmo))
 	{
+		if (!ensure(ProjectileBP)) { return; }
 		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBP,
 			Barrel->GetSocketTransform(FName("ProjectileSpawn")));
 
