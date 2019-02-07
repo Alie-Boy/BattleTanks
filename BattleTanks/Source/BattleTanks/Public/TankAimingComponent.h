@@ -61,6 +61,7 @@ public:
 	void MoveBarrelTowards(FVector AimDirection);
 private:
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	int32 AmmoCount = 5;
 
 	bool IsBarrelMoving() const;
@@ -73,6 +74,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float AimTolerance = 0.001f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTime = 3.f; // default
 
 	double PreviousFireTime = 0;
