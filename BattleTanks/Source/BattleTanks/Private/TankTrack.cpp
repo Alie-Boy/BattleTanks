@@ -10,7 +10,7 @@ UTankTrack::UTankTrack()
 void UTankTrack::BeginPlay()
 {
 	Super::BeginPlay();
-	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
+	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit); // AddDynamic is a macro for calling __Internal_AddDynamic
 }
 
 void UTankTrack::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
