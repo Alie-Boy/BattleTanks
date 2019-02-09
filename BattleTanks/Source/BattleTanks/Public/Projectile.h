@@ -9,6 +9,7 @@
 
 class UProjectileMovementComponent;
 class UParticleSystemComponent;
+class URadialForceComponent;
 
 UCLASS()
 class BATTLETANKS_API AProjectile : public AActor
@@ -40,6 +41,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Particle")
 	UParticleSystemComponent* ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Particle")
+	URadialForceComponent* ExplosionForce = nullptr;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
