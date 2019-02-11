@@ -24,6 +24,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditDefaultsOnly)
+	float DestroyDelay = 5.f;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -44,6 +47,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Particle")
 	URadialForceComponent* ExplosionForce = nullptr;
+
+	UFUNCTION()
+	void DestroyProjectile();
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
