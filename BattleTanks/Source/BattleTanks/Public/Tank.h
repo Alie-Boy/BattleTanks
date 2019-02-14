@@ -17,11 +17,18 @@ public:
 	ATank();
 
 private:
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float StartingHEalth = 100.f;
 
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+	float CurrentHealth = StartingHEalth;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 public:	
 

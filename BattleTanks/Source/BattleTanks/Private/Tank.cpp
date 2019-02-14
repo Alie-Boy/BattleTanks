@@ -16,6 +16,18 @@ void ATank::BeginPlay()
 }
 
 
+float ATank::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	int32 DamagePoints = FPlatformMath::RoundToInt(Damage);
+	int32 DamageToApply = FMath::Clamp<int32>(DamagePoints, 0.f, CurrentHealth);
+	CurrentHealth -= DamageToApply;
+
+	if (CurrentHealth <= 0)
+		UE_LOG(LogTemp, Warning, TEXT("Tank died."));
+
+	return DamageToApply;
+}
+
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {

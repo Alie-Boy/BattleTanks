@@ -27,6 +27,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	float DestroyDelay = 5.f;
 
+	UPROPERTY(EditDefaultsOnly)
+	float ProjectileDamage = 20.f;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -37,16 +40,16 @@ private:
 	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
 	
 	UPROPERTY(VisibleAnywhere, Category="Particle")
-	UStaticMeshComponent* CollisionMesh = nullptr;
+	UStaticMeshComponent*     CollisionMesh    = nullptr;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Particle")
-	UParticleSystemComponent* LaunchBlast = nullptr;
+	UParticleSystemComponent* LaunchBlast      = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Particle")
-	UParticleSystemComponent* ImpactBlast = nullptr;
+	UParticleSystemComponent* ImpactBlast      = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Particle")
-	URadialForceComponent* ExplosionForce = nullptr;
+	URadialForceComponent*    ExplosionForce   = nullptr;
 
 	UFUNCTION()
 	void DestroyProjectile();
