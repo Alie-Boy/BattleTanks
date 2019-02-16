@@ -19,10 +19,10 @@ public:
 private:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	float StartingHEalth = 100.f;
+	float StartingHealth = 100.f;
 
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
-	float CurrentHealth = StartingHEalth;
+	float CurrentHealth = StartingHealth;
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,7 +32,6 @@ protected:
 
 public:	
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	UFUNCTION(BlueprintPure, Category = "Setup")
+	float GetHealthPercent() const;
 };

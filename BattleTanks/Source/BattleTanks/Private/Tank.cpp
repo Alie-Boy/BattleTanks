@@ -28,10 +28,8 @@ float ATank::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AC
 	return DamageToApply;
 }
 
-// Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+float ATank::GetHealthPercent() const
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	return (static_cast<float>(CurrentHealth) / static_cast<float>(StartingHealth));
 }
-
 
