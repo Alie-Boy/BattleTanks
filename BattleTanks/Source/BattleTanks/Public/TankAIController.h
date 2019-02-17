@@ -16,6 +16,8 @@ class BATTLETANKS_API ATankAIController : public AAIController
 private:
 	virtual void BeginPlay() override;
 
+	virtual void SetPawn(APawn* InPawn) override;
+
 	UTankAimingComponent* TankAimingComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
@@ -23,4 +25,7 @@ private:
 
 public:
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION()
+	void OnTankDeath();
 };
