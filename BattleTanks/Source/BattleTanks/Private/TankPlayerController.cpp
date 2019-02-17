@@ -4,6 +4,8 @@
 #include "Engine/World.h"
 #include "CollisionQueryParams.h"
 #include <TankAimingComponent.h>
+#include "Tank.h"
+
 
 void ATankPlayerController::BeginPlay()
 {
@@ -13,6 +15,22 @@ void ATankPlayerController::BeginPlay()
 	{
 		FoundAimingComponent(TankAimingComp);
 	}
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		ATank* PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnTankDeath);
+	}
+}
+
+void ATankPlayerController::OnTankDeath()
+{
+	StartSpectatingOnly();
 }
 
 void ATankPlayerController::Tick(float DeltaTime)

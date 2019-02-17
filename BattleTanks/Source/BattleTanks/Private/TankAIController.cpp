@@ -30,7 +30,7 @@ void ATankAIController::Tick(float DeltaTime)
 
 	APawn* PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 
-	if (!ensure(TankAimingComp)) { return; }
+	if (!ensure(TankAimingComp) || !PlayerTank) { return; }
 	TankAimingComp->AimAt(PlayerTank->GetActorLocation());
 
 	MoveToActor(PlayerTank, AcceptanceRadius);
@@ -43,6 +43,5 @@ void ATankAIController::Tick(float DeltaTime)
 
 void ATankAIController::OnTankDeath()
 {
-	FString TankName = Cast<ATank>(GetPawn())->GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s died."), *TankName);
+	GetPawn()->DetachFromControllerPendingDestroy();
 }

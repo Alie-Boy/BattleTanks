@@ -23,7 +23,7 @@ private:
 	float StartingHealth = 100.f;
 
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
-	float CurrentHealth = StartingHealth;
+	float CurrentHealth = 0.f;
 
 protected:
 	// Called when the game starts or when spawned
