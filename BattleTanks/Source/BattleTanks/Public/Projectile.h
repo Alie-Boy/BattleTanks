@@ -24,6 +24,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	// When projectile hits something, destroy it after DestroyDelay secs
 	UPROPERTY(EditDefaultsOnly)
 	float DestroyDelay = 5.f;
 
@@ -42,9 +43,11 @@ private:
 	UPROPERTY(VisibleAnywhere, Category="Particle")
 	UStaticMeshComponent*     CollisionMesh    = nullptr;
 	
+	// Reference to trail particle effect.
 	UPROPERTY(VisibleAnywhere, Category = "Particle")
 	UParticleSystemComponent* LaunchBlast      = nullptr;
 
+	// Reference to Explosion effect which occurs after hitting something.
 	UPROPERTY(VisibleAnywhere, Category = "Particle")
 	UParticleSystemComponent* ImpactBlast      = nullptr;
 
