@@ -19,6 +19,7 @@ USpawnPoint::USpawnPoint()
 void USpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
+	if (!SpawnClass) return;
 	AActor* NewActor = GetWorld()->SpawnActorDeferred<AActor>(SpawnClass, GetComponentTransform());
 	UE_LOG(LogTemp, Warning, TEXT("NewActor: %s"), *(NewActor->GetName()));
 	if (!NewActor) return;
